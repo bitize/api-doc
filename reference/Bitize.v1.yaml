@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Bitize
+  title: Autenticação
   version: '1.0'
   contact:
     name: Carlos Tirabassi
