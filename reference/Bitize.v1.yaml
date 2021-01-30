@@ -93,6 +93,9 @@ paths:
                 secret_key:
                   type: string
                   description: Chave secreta de acesso a API
+              required:
+                - consumer_key
+                - secret_key
       tags:
         - auth
         - login
