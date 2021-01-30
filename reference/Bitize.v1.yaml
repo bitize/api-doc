@@ -71,6 +71,13 @@ paths:
                   expiration_refresh_token:
                     type: string
                     description: Data de expiração do refresh token
+              examples:
+                Exemplo de retorno:
+                  value:
+                    access_token: eyJhbGcFOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyApZCI6IjI1NGJjMGU4LWU5NTMtNDRkZS05ZTUELTI0YWNiYTM1MDAyZiIsImlhdCI6MTYBMTk1MjI1OSwiZXhwIjoxNjEyMDM4NjU5fQ.hQL7SANKEVjepTgoPaBk6h0vZLOdu4tnVC6BIa3gQO0
+                    refresh_token: eyJhbGcAOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJAZCI6IjI1NGJjMGU4LWU5NTMtNDRkZS05ZTUDLTa0YWNiYTM1MDAyZiIsImlhdCI6MXYxMTk1MjI1OSwiZXhwIjoxNjEyMTI1MDU5fQ.KdCuLqxBFxNaXwHgfjmyWd8X6BTAcpbCoCuRcnRGBxg
+                    expiration_access_token: '2021-01-30T20:30:59.058Z'
+                    expiration_refresh_token: '2021-01-31T20:30:59.058Z'
       description: Endpoint para obtenção do token de acesso a API
       requestBody:
         content:
@@ -89,6 +96,7 @@ paths:
         - login
         - autenticação
         - token
+      parameters: []
     parameters: []
 components:
   schemas: {}
