@@ -48,6 +48,8 @@ paths:
           in: query
           name: refresh_token
           description: Refresh token
+          required: true
+      security: []
     post:
       summary: Autenticação - Token de Acesso
       operationId: post-signin
@@ -96,13 +98,26 @@ paths:
         - login
         - autenticação
         - token
-      parameters: []
+      parameters:
+        - schema:
+            type: string
+            default: application/json
+          in: header
+          name: Content-Type
+          required: true
+      security: []
     parameters: []
 components:
   schemas: {}
+  securitySchemes:
+    Token:
+      type: http
+      scheme: bearer
 tags:
   - name: auth
   - name: login
   - name: autenticação
   - name: token
   - name: refresh token
+security:
+  - Token: []
