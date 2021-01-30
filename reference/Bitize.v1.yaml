@@ -105,10 +105,10 @@ paths:
                 - consumer_key
                 - secret_key
             examples:
-              example-1:
+              Exemplo:
                 value:
-                  consumer_key: string
-                  secret_key: string
+                  consumer_key: 15aa5a99-b27e-48ab-8076-7da9059337cb
+                  secret_key: ExEmPlO1234@#$
         description: ''
       tags:
         - auth
