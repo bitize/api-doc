@@ -14,7 +14,7 @@ servers:
 paths:
   /auth:
     get:
-      summary: Autenticação - Refresh Token
+      summary: Autenticação
       tags:
         - refresh token
         - login
@@ -58,7 +58,7 @@ paths:
           required: true
       security: []
     post:
-      summary: Autenticação - Token de Acesso
+      summary: Autenticação
       operationId: post-signin
       responses:
         '200':
