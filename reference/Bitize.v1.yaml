@@ -761,7 +761,113 @@ paths:
       security:
         - Access Token: []
 components:
-  schemas: {}
+  schemas:
+    company_address:
+      description: Endereços da Empresa
+      type: object
+      x-examples:
+        Exemplo:
+          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          external_id: string
+          type: string
+          country_id: string
+          postal_code: string
+          state_iso: string
+          city: string
+          ibge: string
+          neighborhood: string
+          street: string
+          number: string
+          complement: string
+          notes: string
+          created_at: string
+          updated_at: string
+          deleted_at: string
+          company_id: string
+      properties:
+        id:
+          type: string
+          minLength: 1
+          format: uuid
+          description: Id do endereço
+          readOnly: true
+        external_id:
+          type: string
+          description: Identificador customizado
+        type:
+          type: string
+          minLength: 1
+          description: Tipo de endereço
+        country_id:
+          type: string
+          minLength: 1
+          description: Código do País
+        postal_code:
+          type: string
+          minLength: 1
+          description: CEP
+        state_iso:
+          type: string
+          minLength: 1
+          description: UF
+        city:
+          type: string
+          minLength: 1
+          description: Cidade
+        ibge:
+          type: string
+          minLength: 1
+          description: Código IBGE
+        neighborhood:
+          type: string
+          minLength: 1
+          description: Bairro
+        street:
+          type: string
+          minLength: 1
+          description: Rua
+        number:
+          type: string
+          minLength: 1
+          description: Número
+        complement:
+          type: string
+          minLength: 1
+          description: Complemento
+        notes:
+          type: string
+          description: Observação
+        created_at:
+          type: string
+          minLength: 1
+          description: Data do cadastro
+          readOnly: true
+        updated_at:
+          type: string
+          minLength: 1
+          description: Data da atualização
+          readOnly: true
+        deleted_at:
+          type: string
+          minLength: 1
+          description: Data da exclusão
+          readOnly: true
+        company_id:
+          type: string
+          minLength: 1
+          description: ID da empresa
+          format: uuid
+      required:
+        - type
+        - country_id
+        - postal_code
+        - state_iso
+        - city
+        - neighborhood
+        - street
+        - number
+        - company_id
+      title: Company address
   securitySchemes:
     Access Token:
       type: http
