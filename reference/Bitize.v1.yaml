@@ -122,6 +122,266 @@ paths:
           required: true
       security: []
     parameters: []
+  '/vendors/{id}':
+    get:
+      summary: Fornecedores
+      tags:
+        - vendors
+        - fornecedores
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                      page:
+                        type: number
+                      pages:
+                        type: number
+                      total:
+                        type: number
+                  sort:
+                    type: array
+                    items:
+                      type: object
+                  available_filters:
+                    type: array
+                    items:
+                      type: object
+                  applied_filters:
+                    type: object
+                  data:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          minLength: 1
+                        external_id: {}
+                        active:
+                          type: boolean
+                        notes: {}
+                        created_at:
+                          type: string
+                          minLength: 1
+                        updated_at:
+                          type: string
+                          minLength: 1
+                        deleted_at: {}
+                        company_id:
+                          type: string
+                          minLength: 1
+                        customer_id:
+                          type: string
+                          minLength: 1
+                        company:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              minLength: 1
+                            name:
+                              type: string
+                              minLength: 1
+                            company_name:
+                              type: string
+                            external_id: {}
+                            national_document:
+                              type: string
+                              minLength: 1
+                            state_document: {}
+                            municipal_document: {}
+                            country_id:
+                              type: string
+                              minLength: 1
+                            state_iso:
+                              type: string
+                              minLength: 1
+                            active:
+                              type: boolean
+                            situation:
+                              type: string
+                              minLength: 1
+                            situation_date:
+                              type: string
+                              minLength: 1
+                            opening:
+                              type: string
+                              minLength: 1
+                            portuguese_description: {}
+                            english_description: {}
+                            spanish_description: {}
+                            keywords: {}
+                            localizable:
+                              type: boolean
+                            homologation_level:
+                              type: string
+                              minLength: 1
+                            main_activity_code:
+                              type: string
+                              minLength: 1
+                            main_activity:
+                              type: string
+                              minLength: 1
+                            date_special_situation:
+                              type: string
+                              minLength: 1
+                            special_situation:
+                              type: string
+                            last_update:
+                              type: string
+                              minLength: 1
+                            logo_id:
+                              type: string
+                              minLength: 1
+                            status:
+                              type: string
+                              minLength: 1
+                            person:
+                              type: string
+                              minLength: 1
+                            created_at:
+                              type: string
+                              minLength: 1
+                            updated_at:
+                              type: string
+                              minLength: 1
+                            deleted_at: {}
+                            addresses:
+                              type: array
+                              uniqueItems: true
+                              minItems: 1
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    minLength: 1
+                                  external_id: {}
+                                  type:
+                                    type: string
+                                    minLength: 1
+                                  country_id:
+                                    type: string
+                                    minLength: 1
+                                  postal_code:
+                                    type: string
+                                    minLength: 1
+                                  state_iso:
+                                    type: string
+                                    minLength: 1
+                                  city:
+                                    type: string
+                                    minLength: 1
+                                  ibge:
+                                    type: string
+                                    minLength: 1
+                                  neighborhood:
+                                    type: string
+                                    minLength: 1
+                                  street:
+                                    type: string
+                                    minLength: 1
+                                  number:
+                                    type: string
+                                    minLength: 1
+                                  complement:
+                                    type: string
+                                  notes: {}
+                                  created_at:
+                                    type: string
+                                    minLength: 1
+                                  updated_at:
+                                    type: string
+                                    minLength: 1
+                                  deleted_at: {}
+                                  company_id:
+                                    type: string
+                                    minLength: 1
+                                required:
+                                  - id
+                                  - type
+                                  - country_id
+                                  - postal_code
+                                  - state_iso
+                                  - city
+                                  - ibge
+                                  - neighborhood
+                                  - street
+                                  - number
+                                  - complement
+                                  - created_at
+                                  - updated_at
+                                  - company_id
+                            contacts:
+                              type: array
+                              uniqueItems: true
+                              minItems: 1
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                    minLength: 1
+                                  external_id: {}
+                                  type:
+                                    type: string
+                                    minLength: 1
+                                  title:
+                                    type: string
+                                    minLength: 1
+                                  country_area_code:
+                                    type: string
+                                    minLength: 1
+                                  phone:
+                                    type: string
+                                    minLength: 1
+                                  extension: {}
+                                  email:
+                                    type: string
+                                    minLength: 1
+                                  notes: {}
+                                  created_at:
+                                    type: string
+                                    minLength: 1
+                                  updated_at:
+                                    type: string
+                                    minLength: 1
+                                  deleted_at: {}
+                                  company_id:
+                                    type: string
+                                    minLength: 1
+                                required:
+                                  - id
+                                  - type
+                                  - title
+                                  - country_area_code
+                                  - phone
+                                  - email
+                                  - created_at
+                                  - updated_at
+                                  - company_id
+      operationId: get-vendors
+      description: Lista os fornecedores cadastrados
+      security:
+        - Token: []
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        description: ID do Fornecedor
 components:
   schemas: {}
   securitySchemes:
@@ -134,5 +394,7 @@ tags:
   - name: autenticação
   - name: token
   - name: refresh token
+  - name: vendors
+  - name: fornecedores
 security:
   - Token: []
