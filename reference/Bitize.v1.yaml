@@ -97,6 +97,7 @@ paths:
                 consumer_key:
                   type: string
                   description: Chave de consumo do API
+                  format: uuid
                 secret_key:
                   type: string
                   description: Chave secreta de acesso a API
@@ -108,6 +109,7 @@ paths:
                 value:
                   consumer_key: string
                   secret_key: string
+        description: ''
       tags:
         - auth
         - login
@@ -683,6 +685,77 @@ paths:
                         type: string
                         description: ID do logo
                         format: uuid
+              examples:
+                example-1:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    external_id: string
+                    active: true
+                    notes: string
+                    created_at: string
+                    updated_at: string
+                    deleted_at: string
+                    company_id: b2e6a1c3-1a5e-44ae-a8fd-81f76fd715cf
+                    customer_id: 160c0c4b-9966-4dc1-a916-8407eb10d74e
+                    company:
+                      name: string
+                      company_name: string
+                      national_document: string
+                      state_document: string
+                      municipal_document: string
+                      country_id: string
+                      state_iso: string
+                      active: true
+                      situation: string
+                      situation_date: string
+                      opening: string
+                      portuguese_description: string
+                      english_description: string
+                      spanish_description: string
+                      homologation_level: string
+                      main_activity_code: string
+                      main_activity: string
+                      date_special_situation: string
+                      special_situation: string
+                      last_update: string
+                      status: string
+                      person: 'L: Pessoa Jurídica'
+                      created_at: string
+                      updated_at: string
+                      deleted_at: string
+                      addresses:
+                        - id: string
+                          external_id: null
+                          type: string
+                          country_id: string
+                          postal_code: string
+                          state_iso: string
+                          city: string
+                          ibge: string
+                          neighborhood: string
+                          street: string
+                          number: string
+                          complement: string
+                          notes: null
+                          created_at: string
+                          updated_at: string
+                          deleted_at: null
+                          company_id: string
+                      contacts:
+                        - id: string
+                          external_id: null
+                          type: string
+                          title: string
+                          country_area_code: string
+                          phone: string
+                          extension: null
+                          email: string
+                          notes: null
+                          created_at: string
+                          updated_at: string
+                          deleted_at: null
+                          company_id: string
+                      logo_id: 1e12da27-d253-43f5-9f73-dd2101ceac0d
       operationId: get-vendors-id
       description: Retorna os dados do fornecedor
       security:
