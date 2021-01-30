@@ -1,0 +1,100 @@
+openapi: 3.0.0
+info:
+  title: Bitize
+  version: '1.0'
+  contact:
+    name: Carlos Tirabassi
+    email: carlos@bitize.com.br
+  description: API de integração com o backend do Bitize
+servers:
+  - url: 'https://api.bitize.com.br'
+    description: Produção
+  - url: 'https://api-tst.bitize.com.br'
+    description: Testes
+paths:
+  /auth:
+    get:
+      summary: Autenticação - Refresh Token
+      tags:
+        - refresh token
+        - login
+        - auth
+        - autenticação
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: Token de acesso
+                  refresh_token:
+                    type: string
+                    description: Refresh token
+                  expiration_access_token:
+                    type: string
+                    description: Data de expiração do token de acesso
+                  expiration_refresh_token:
+                    type: string
+                    description: Data de expiração do refresh token
+      operationId: get-signin
+      description: Endpoint para obtenção de um novo token através de um refresh token válido
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: refresh_token
+          description: Refresh token
+    post:
+      summary: Autenticação - Token de Acesso
+      operationId: post-signin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: Token de acesso
+                  refresh_token:
+                    type: string
+                    description: Refresh token
+                  expiration_access_token:
+                    type: string
+                    description: Data de expiração do token de acesso
+                  expiration_refresh_token:
+                    type: string
+                    description: Data de expiração do refresh token
+      description: Endpoint para obtenção do token de acesso a API
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                consumer_key:
+                  type: string
+                  description: Chave de consumo do API
+                secret_key:
+                  type: string
+                  description: Chave secreta de acesso a API
+      tags:
+        - auth
+        - login
+        - autenticação
+        - token
+    parameters: []
+components:
+  schemas: {}
+tags:
+  - name: auth
+  - name: login
+  - name: autenticação
+  - name: token
+  - name: refresh token
