@@ -124,7 +124,7 @@ paths:
     parameters: []
   /vendors:
     get:
-      summary: Fornecedores
+      summary: Listar Fornecedores
       tags:
         - vendors
         - fornecedores
@@ -378,7 +378,7 @@ paths:
         - Access Token: []
     parameters: []
     post:
-      summary: Fornecedores
+      summary: Cadastrar Fornecedor
       operationId: post-vendors-id
       responses:
         '200':
