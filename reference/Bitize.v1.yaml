@@ -375,7 +375,7 @@ paths:
       operationId: get-vendors
       description: Lista os fornecedores cadastrados
       security:
-        - Token: []
+        - Access Token: []
     parameters: []
     post:
       summary: Fornecedores
@@ -385,7 +385,7 @@ paths:
           description: OK
       description: Cadastro de fornecedores
       security:
-        - Token: []
+        - Access Token: []
       requestBody:
         content:
           application/json:
@@ -402,10 +402,295 @@ paths:
               required:
                 - national_document
                 - country_id
+      tags:
+        - vendors
+        - fornecedores
+  '/vendors/{id}':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: id
+        in: path
+        required: true
+        description: ID do Fornecedor
+    get:
+      summary: Fornecedor
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  id:
+                    type: string
+                    minLength: 1
+                    format: uuid
+                    description: ID do Fornecedor
+                  external_id:
+                    type: string
+                    description: Identificação customizada do cadastro
+                  active:
+                    type: boolean
+                    description: Registro ativo
+                  notes:
+                    type: string
+                    description: Observações
+                  created_at:
+                    type: string
+                    minLength: 1
+                    description: Data do cadastro
+                  updated_at:
+                    type: string
+                    minLength: 1
+                    description: Data da atualização
+                  deleted_at:
+                    type: string
+                    description: Data da exclusão
+                  company_id:
+                    type: string
+                    minLength: 1
+                    format: uuid
+                    description: ID da Empresa
+                  customer_id:
+                    type: string
+                    minLength: 1
+                    format: uuid
+                    description: ID do Cliente
+                  company:
+                    type: object
+                    required:
+                      - contacts
+                    description: Dados da empresa no Bitize
+                    properties:
+                      name:
+                        type: string
+                        minLength: 1
+                        description: Razão Social
+                      company_name:
+                        type: string
+                        minLength: 1
+                        description: Nome Fantasia
+                      national_document:
+                        type: string
+                        minLength: 1
+                        description: CNPJ
+                      state_document:
+                        type: string
+                        description: Inscrição estadual
+                      municipal_document:
+                        type: string
+                        description: Inscrição municipal
+                      country_id:
+                        type: string
+                        minLength: 1
+                        description: Código do país
+                      state_iso:
+                        type: string
+                        minLength: 1
+                        description: UF
+                      active:
+                        type: boolean
+                        description: Empresa ativa na plataforma
+                      situation:
+                        type: string
+                        minLength: 1
+                        description: Situação na Sefaz
+                      situation_date:
+                        type: string
+                        minLength: 1
+                        description: Data da situação na Sefaz
+                      opening:
+                        type: string
+                        minLength: 1
+                        description: Data de abertura da empresa
+                      portuguese_description:
+                        type: string
+                        description: Descrição da Empresa em português
+                      english_description:
+                        type: string
+                        description: Descrição da Empresa em inglês
+                      spanish_description:
+                        type: string
+                        description: Descrição da Empresa em espanhol
+                      homologation_level:
+                        type: string
+                        minLength: 1
+                        description: Nível de homologação na plataforma
+                      main_activity_code:
+                        type: string
+                        minLength: 1
+                        description: Código da atividade
+                      main_activity:
+                        type: string
+                        minLength: 1
+                        description: Atividade
+                      date_special_situation:
+                        type: string
+                        minLength: 1
+                        description: Data da situação especial na Sefaz
+                      special_situation:
+                        type: string
+                        description: Situação especial
+                      last_update:
+                        type: string
+                        minLength: 1
+                        description: Última atualização na SEFAZ
+                      status:
+                        type: string
+                        minLength: 1
+                        description: Status na SEFAZ
+                      person:
+                        type: string
+                        minLength: 1
+                        description: Tipo de Pessoa
+                        enum:
+                          - 'L: Pessoa Jurídica'
+                          - 'N: Pessoa Física'
+                      created_at:
+                        type: string
+                        minLength: 1
+                        description: Data do cadastro na plataforma
+                      updated_at:
+                        type: string
+                        minLength: 1
+                        description: Data da atualização na plataforma
+                      deleted_at:
+                        type: string
+                        description: Data da exclusão na plataforma
+                      addresses:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        description: Endereços
+                        items:
+                          type: object
+                          description: Endereço
+                          properties:
+                            id:
+                              type: string
+                              minLength: 1
+                            external_id: {}
+                            type:
+                              type: string
+                              minLength: 1
+                            country_id:
+                              type: string
+                              minLength: 1
+                            postal_code:
+                              type: string
+                              minLength: 1
+                            state_iso:
+                              type: string
+                              minLength: 1
+                            city:
+                              type: string
+                              minLength: 1
+                            ibge:
+                              type: string
+                              minLength: 1
+                            neighborhood:
+                              type: string
+                              minLength: 1
+                            street:
+                              type: string
+                              minLength: 1
+                            number:
+                              type: string
+                              minLength: 1
+                            complement:
+                              type: string
+                              minLength: 1
+                            notes: {}
+                            created_at:
+                              type: string
+                              minLength: 1
+                            updated_at:
+                              type: string
+                              minLength: 1
+                            deleted_at: {}
+                            company_id:
+                              type: string
+                              minLength: 1
+                          required:
+                            - id
+                            - type
+                            - country_id
+                            - postal_code
+                            - state_iso
+                            - city
+                            - ibge
+                            - neighborhood
+                            - street
+                            - number
+                            - complement
+                            - created_at
+                            - updated_at
+                            - company_id
+                      contacts:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              minLength: 1
+                            external_id: {}
+                            type:
+                              type: string
+                              minLength: 1
+                            title:
+                              type: string
+                              minLength: 1
+                            country_area_code:
+                              type: string
+                              minLength: 1
+                            phone:
+                              type: string
+                              minLength: 1
+                            extension: {}
+                            email:
+                              type: string
+                              minLength: 1
+                            notes: {}
+                            created_at:
+                              type: string
+                              minLength: 1
+                            updated_at:
+                              type: string
+                              minLength: 1
+                            deleted_at: {}
+                            company_id:
+                              type: string
+                              minLength: 1
+                          required:
+                            - id
+                            - type
+                            - title
+                            - country_area_code
+                            - phone
+                            - email
+                            - created_at
+                            - updated_at
+                            - company_id
+                      logo_id:
+                        type: string
+                        description: ID do logo
+                        format: uuid
+      operationId: get-vendors-id
+      description: Retorna os dados do fornecedor
+      security:
+        - Access Token: []
 components:
   schemas: {}
   securitySchemes:
-    Token:
+    Access Token:
       type: http
       scheme: bearer
 tags:
