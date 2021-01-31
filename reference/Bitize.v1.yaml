@@ -762,8 +762,8 @@ paths:
         - Access Token: []
 components:
   schemas:
-    company_address:
-      description: Endereços da Empresa
+    CompanyAddress:
+      description: Endereço da Empresa
       type: object
       x-examples:
         Exemplo:
@@ -868,10 +868,232 @@ components:
         - number
         - company_id
       title: Company address
+    CompanyContact:
+      description: Contato da Empresa
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+          format: uuid
+          description: Id do contato
+          readOnly: true
+        external_id:
+          type: string
+          description: Identificador customizado
+        type:
+          type: string
+          minLength: 1
+          description: Tipo de contato
+        title:
+          type: string
+          minLength: 1
+          description: Título
+        country_area_code:
+          type: string
+          minLength: 1
+          description: DDI
+        phone:
+          type: string
+          minLength: 1
+          description: Telefone com DDD
+        extension:
+          type: string
+          description: Ramal
+        email:
+          type: string
+          minLength: 1
+          description: E-mail
+        notes:
+          type: string
+          description: Observações
+        created_at:
+          type: string
+          minLength: 1
+          description: Data do cadastro
+          readOnly: true
+        updated_at:
+          type: string
+          minLength: 1
+          description: Data da atualização
+          readOnly: true
+        deleted_at:
+          type: string
+          minLength: 1
+          description: Data da exclusão
+          readOnly: true
+        company_id:
+          type: string
+          minLength: 1
+          format: uuid
+          description: Id da empresa
+      required:
+        - type
+        - title
+        - email
+        - company_id
+      x-examples:
+        Exemplo:
+          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          external_id: string
+          type: string
+          title: string
+          country_area_code: string
+          phone: string
+          extension: string
+          email: string
+          notes: string
+          created_at: string
+          updated_at: string
+          deleted_at: string
+          company_id: b2e6a1c3-1a5e-44ae-a8fd-81f76fd715cf
+    CompanyDocument:
+      title: Company Document
+      type: object
+      properties:
+        id:
+          type: string
+      description: Documento da Empresa
+    Company:
+      description: ''
+      type: object
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Id da Empresa
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+        company_name:
+          type: string
+          minLength: 1
+        external_id:
+          type: string
+        national_document:
+          type: string
+          minLength: 1
+        state_document:
+          type: string
+        municipal_document:
+          type: string
+        country_id:
+          type: string
+          minLength: 1
+        state_iso:
+          type: string
+          minLength: 1
+        active:
+          type: boolean
+        situation:
+          type: string
+          minLength: 1
+        situation_date:
+          type: string
+          minLength: 1
+        opening:
+          type: string
+          minLength: 1
+        portuguese_description:
+          type: string
+        english_description:
+          type: string
+        spanish_description:
+          type: string
+        keywords:
+          type: array
+          items:
+            type: string
+        localizable:
+          type: boolean
+        homologation_level:
+          type: string
+          minLength: 1
+        main_activity_code:
+          type: string
+          minLength: 1
+        main_activity:
+          type: string
+          minLength: 1
+        date_special_situation:
+          type: string
+          minLength: 1
+        special_situation:
+          type: string
+        last_update:
+          type: string
+          minLength: 1
+        logo_id: {}
+        status:
+          type: string
+          minLength: 1
+        person:
+          type: string
+          minLength: 1
+        created_at:
+          type: string
+          minLength: 1
+          readOnly: true
+        updated_at:
+          type: string
+          minLength: 1
+          readOnly: true
+        deleted_at:
+          type: string
+          minLength: 1
+          readOnly: true
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyAddress'
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyContact'
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyDocument'
+      required:
+        - name
+        - company_name
+        - national_document
+        - country_id
+        - state_iso
+        - active
+        - situation
+        - situation_date
+        - opening
+        - localizable
+        - homologation_level
+        - main_activity_code
+        - main_activity
+        - date_special_situation
+        - special_situation
+        - last_update
+        - status
+        - person
   securitySchemes:
     Access Token:
       type: http
       scheme: bearer
+  parameters:
+    Content-Type:
+      name: Content-Type
+      in: query
+      required: true
+      schema:
+        type: string
+        default: application/json
+      description: Content Type
+    Sort:
+      name: Sort
+      in: query
+      schema:
+        type: string
+        example: sort=id-asc
+      description: Ordenação
 tags:
   - name: auth
   - name: login
