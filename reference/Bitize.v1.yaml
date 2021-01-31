@@ -47,6 +47,8 @@ paths:
                     refresh_token: eyJhbGcAOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJAZCI6IjI1NGJjMGU4LWU5NTMtNDRkZS05ZTUDLTa0YWNiYTM1MDAyZiIsImlhdCI6MXYxMTk1MjI1OSwiZXhwIjoxNjEyMTI1MDU5fQ.KdCuLqxBFxNaXwHgfjmyWd8X6BTAcpbCoCuRcnRGBxg
                     expiration_access_token: '2021-01-30T20:30:59.058Z'
                     expiration_refresh_token: '2021-01-31T20:30:59.058Z'
+        '400':
+          $ref: '#/components/responses/400'
       operationId: get-signin
       description: Endpoint para obtenção de um novo token através de um refresh token válido
       parameters:
@@ -87,6 +89,8 @@ paths:
                     refresh_token: eyJhbGcAOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJAZCI6IjI1NGJjMGU4LWU5NTMtNDRkZS05ZTUDLTa0YWNiYTM1MDAyZiIsImlhdCI6MXYxMTk1MjI1OSwiZXhwIjoxNjEyMTI1MDU5fQ.KdCuLqxBFxNaXwHgfjmyWd8X6BTAcpbCoCuRcnRGBxg
                     expiration_access_token: '2021-01-30T20:30:59.058Z'
                     expiration_refresh_token: '2021-01-31T20:30:59.058Z'
+        '400':
+          $ref: '#/components/responses/400'
       description: Endpoint para obtenção do token de acesso a API
       requestBody:
         content:
@@ -374,6 +378,10 @@ paths:
                                   - created_at
                                   - updated_at
                                   - company_id
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
       operationId: get-vendors
       description: Lista os fornecedores cadastrados
       security:
@@ -385,6 +393,10 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
       description: Cadastro de fornecedores
       security:
         - Access Token: []
@@ -756,6 +768,14 @@ paths:
                           deleted_at: null
                           company_id: string
                       logo_id: 1e12da27-d253-43f5-9f73-dd2101ceac0d
+        '400':
+          description: Bad Request
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
       operationId: get-vendors-id
       description: Retorna os dados do fornecedor
       security:
@@ -1094,6 +1114,35 @@ components:
         type: string
         example: sort=id-asc
       description: Ordenação
+  responses:
+    '400':
+      description: 'Bad Request: Significa que o servidor não entendeu a requisição pois está com uma sintaxe inválida.'
+      content:
+        application/json:
+          schema:
+            $ref: ./Error.v1.yaml
+    '401':
+      description: 'Unauthorized: O cliente deve se autenticar para obter a resposta solicitada.'
+      content:
+        application/json:
+          schema:
+            $ref: ./Error.v1.yaml
+    '403':
+      description: 'Forbidden: O cliente não tem direitos de acesso ao conteúdo portanto o servidor está rejeitando dar a resposta.'
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                type: string
+    '404':
+      description: 'Not Found: O servidor não pode encontrar o recurso solicitado.'
+      content:
+        application/json:
+          schema:
+            properties:
+              id:
+                type: string
 tags:
   - name: auth
   - name: login
