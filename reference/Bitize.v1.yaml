@@ -37,9 +37,11 @@ paths:
                   expiration_access_token:
                     type: string
                     description: Data de expiração do token de acesso
+                    format: date-time
                   expiration_refresh_token:
                     type: string
                     description: Data de expiração do refresh token
+                    format: date-time
               examples:
                 Exemplo de retorno:
                   value:
@@ -79,9 +81,11 @@ paths:
                   expiration_access_token:
                     type: string
                     description: Data de expiração do token de acesso
+                    format: date-time
                   expiration_refresh_token:
                     type: string
                     description: Data de expiração do refresh token
+                    format: date-time
               examples:
                 Exemplo de retorno:
                   value:
@@ -112,7 +116,7 @@ paths:
               Exemplo:
                 value:
                   consumer_key: 15aa5a99-b27e-48ab-8076-7da9059337cb
-                  secret_key: ExEmPlO1234@#$
+                  secret_key: EaExPlO1234@#$1qsdeRqas4
         description: ''
       tags:
         - auth
@@ -804,6 +808,7 @@ components:
           updated_at: string
           deleted_at: string
           company_id: string
+      title: Company address
       properties:
         id:
           type: string
@@ -861,16 +866,19 @@ components:
           type: string
           minLength: 1
           description: Data do cadastro
+          format: date-time
           readOnly: true
         updated_at:
           type: string
           minLength: 1
           description: Data da atualização
+          format: date-time
           readOnly: true
         deleted_at:
           type: string
           minLength: 1
           description: Data da exclusão
+          format: date-time
           readOnly: true
         company_id:
           type: string
@@ -887,10 +895,24 @@ components:
         - street
         - number
         - company_id
-      title: Company address
     CompanyContact:
       description: Contato da Empresa
       type: object
+      x-examples:
+        Exemplo:
+          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          external_id: string
+          type: string
+          title: string
+          country_area_code: string
+          phone: string
+          extension: string
+          email: string
+          notes: string
+          created_at: string
+          updated_at: string
+          deleted_at: string
+          company_id: b2e6a1c3-1a5e-44ae-a8fd-81f76fd715cf
       properties:
         id:
           type: string
@@ -931,16 +953,19 @@ components:
           type: string
           minLength: 1
           description: Data do cadastro
+          format: date-time
           readOnly: true
         updated_at:
           type: string
           minLength: 1
           description: Data da atualização
+          format: date-time
           readOnly: true
         deleted_at:
           type: string
           minLength: 1
           description: Data da exclusão
+          format: date-time
           readOnly: true
         company_id:
           type: string
@@ -952,21 +977,6 @@ components:
         - title
         - email
         - company_id
-      x-examples:
-        Exemplo:
-          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-          external_id: string
-          type: string
-          title: string
-          country_area_code: string
-          phone: string
-          extension: string
-          email: string
-          notes: string
-          created_at: string
-          updated_at: string
-          deleted_at: string
-          company_id: b2e6a1c3-1a5e-44ae-a8fd-81f76fd715cf
     CompanyDocument:
       title: Company Document
       type: object
@@ -1054,14 +1064,17 @@ components:
         created_at:
           type: string
           minLength: 1
+          format: date-time
           readOnly: true
         updated_at:
           type: string
           minLength: 1
+          format: date-time
           readOnly: true
         deleted_at:
           type: string
           minLength: 1
+          format: date-time
           readOnly: true
         addresses:
           type: array
