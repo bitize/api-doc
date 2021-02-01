@@ -116,12 +116,7 @@ paths:
                   secret_key: EaExPlO1234@#$1qsdeRqas4
         description: ''
       parameters:
-        - schema:
-            type: string
-            default: application/json
-          in: header
-          name: Content-Type
-          required: true
+        - $ref: '#/components/parameters/Content-Type'
       security: []
       tags:
         - autenticação
@@ -415,6 +410,8 @@ paths:
                 - country_id
       tags:
         - fornecedores
+      parameters:
+        - $ref: '#/components/parameters/Content-Type'
   '/vendors/{id}':
     parameters:
       - schema:
@@ -425,7 +422,7 @@ paths:
         required: true
         description: ID do Fornecedor
     get:
-      summary: Fornecedor
+      summary: Listar Fornecedor
       responses:
         '200':
           description: OK
@@ -777,6 +774,32 @@ paths:
         - Access Token: []
       tags:
         - fornecedores
+    put:
+      summary: Atualizar Fornecedor
+      operationId: put-vendors-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+      description: Atualizar cadastro de fornecedor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+      tags:
+        - fornecedores
 components:
   schemas:
     CompanyAddress:
@@ -1107,14 +1130,6 @@ components:
       type: http
       scheme: bearer
   parameters:
-    Content-Type:
-      name: Content-Type
-      in: query
-      required: true
-      schema:
-        type: string
-        default: application/json
-      description: Content Type
     Sort:
       name: Sort
       in: query
@@ -1122,6 +1137,14 @@ components:
         type: string
         example: sort=id-asc
       description: Ordenação
+    Content-Type:
+      name: Content-Type
+      in: header
+      required: false
+      schema:
+        type: string
+        default: application/json
+      description: Tipo de conteúdo
   responses:
     '400':
       description: 'Bad Request: Significa que o servidor não entendeu a requisição pois está com uma sintaxe inválida.'
