@@ -1,4 +1,4 @@
-description: ''
+description: Essa é a estrutura padrão das mensagens de erro da plataforma
 type: object
 properties:
   status:
