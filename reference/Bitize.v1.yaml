@@ -784,8 +784,8 @@ paths:
       security:
         - Access Token: []
       tags:
-        - fornecedores
         - vendors
+        - fornecedores        
 components:
   schemas:
     CompanyAddress:
