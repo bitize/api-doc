@@ -14,7 +14,7 @@ servers:
 paths:
   /auth:
     get:
-      summary: Autenticação - Refresh Token
+      summary: Refresh Token
       tags:
         - refresh token
         - login
@@ -51,7 +51,7 @@ paths:
                     expiration_refresh_token: '2021-01-31T20:30:59.058Z'
         '400':
           $ref: '#/components/responses/400'
-      operationId: get-signin
+      operationId: get-auth
       description: Endpoint para obtenção de um novo token através de um refresh token válido
       parameters:
         - schema:
@@ -62,8 +62,8 @@ paths:
           required: true
       security: []
     post:
-      summary: Autenticação - Token
-      operationId: post-signin
+      summary: Token
+      operationId: post-auth
       responses:
         '200':
           description: OK
@@ -393,7 +393,7 @@ paths:
     parameters: []
     post:
       summary: Cadastrar Fornecedor
-      operationId: post-vendors-id
+      operationId: post-vendors
       responses:
         '200':
           description: OK
@@ -434,7 +434,6 @@ paths:
         description: ID do Fornecedor
     get:
       summary: Fornecedor
-      tags: []
       responses:
         '200':
           description: OK
@@ -784,6 +783,9 @@ paths:
       description: Retorna os dados do fornecedor
       security:
         - Access Token: []
+      tags:
+        - fornecedores
+        - vendors
 components:
   schemas:
     CompanyAddress:
