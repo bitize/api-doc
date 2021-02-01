@@ -16,10 +16,7 @@ paths:
     get:
       summary: Refresh Token
       tags:
-        - refresh token
-        - login
         - auth
-        - autenticação
       responses:
         '200':
           description: OK
@@ -120,9 +117,6 @@ paths:
         description: ''
       tags:
         - auth
-        - login
-        - autenticação
-        - token
       parameters:
         - schema:
             type: string
@@ -785,7 +779,7 @@ paths:
         - Access Token: []
       tags:
         - vendors
-        - fornecedores        
+        - fornecedores
 components:
   schemas:
     CompanyAddress:
@@ -1160,10 +1154,6 @@ components:
                 type: string
 tags:
   - name: auth
-  - name: login
-  - name: autenticação
-  - name: token
-  - name: refresh token
   - name: vendors
   - name: fornecedores
 security:
