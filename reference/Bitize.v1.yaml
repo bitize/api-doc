@@ -15,8 +15,6 @@ paths:
   /auth:
     get:
       summary: Refresh Token
-      tags:
-        - auth
       responses:
         '200':
           description: OK
@@ -58,6 +56,8 @@ paths:
           description: Refresh token
           required: true
       security: []
+      tags:
+        - autenticação
     post:
       summary: Token
       operationId: post-auth
@@ -115,8 +115,6 @@ paths:
                   consumer_key: 15aa5a99-b27e-48ab-8076-7da9059337cb
                   secret_key: EaExPlO1234@#$1qsdeRqas4
         description: ''
-      tags:
-        - auth
       parameters:
         - schema:
             type: string
@@ -125,12 +123,13 @@ paths:
           name: Content-Type
           required: true
       security: []
+      tags:
+        - autenticação
     parameters: []
   /vendors:
     get:
       summary: Listar Fornecedores
       tags:
-        - vendors
         - fornecedores
       responses:
         '200':
@@ -415,7 +414,6 @@ paths:
                 - national_document
                 - country_id
       tags:
-        - vendors
         - fornecedores
   '/vendors/{id}':
     parameters:
@@ -778,7 +776,6 @@ paths:
       security:
         - Access Token: []
       tags:
-        - vendors
         - fornecedores
 components:
   schemas:
@@ -1153,8 +1150,7 @@ components:
               id:
                 type: string
 tags:
-  - name: auth
-  - name: vendors
   - name: fornecedores
+  - name: autenticação
 security:
   - Token: []
