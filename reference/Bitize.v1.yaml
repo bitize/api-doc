@@ -780,7 +780,7 @@ paths:
 components:
   schemas:
     CompanyAddress:
-      description: Endereço da Empresa
+      description: Modelo de endereço da empresa no Bitize
       type: object
       x-examples:
         Exemplo:
@@ -801,7 +801,7 @@ components:
           updated_at: string
           deleted_at: string
           company_id: string
-      title: Company address
+      title: Endereços da Empresa
       properties:
         id:
           type: string
@@ -889,7 +889,7 @@ components:
         - number
         - company_id
     CompanyContact:
-      description: Contato da Empresa
+      description: Modelo de contato da empresa no Bitize
       type: object
       x-examples:
         Exemplo:
@@ -970,15 +970,16 @@ components:
         - title
         - email
         - company_id
+      title: Contatos da Empresa
     CompanyDocument:
-      title: Company Document
+      title: Documentos da Empresa
       type: object
       properties:
         id:
           type: string
-      description: Documento da Empresa
+      description: Modelo de cadastro de documento da empresa no Bitize
     Company:
-      description: ''
+      description: Modelo do cadastro de empresa no Bitize
       type: object
       properties:
         id:
@@ -1100,6 +1101,7 @@ components:
         - last_update
         - status
         - person
+      title: Empresas
   securitySchemes:
     Access Token:
       type: http

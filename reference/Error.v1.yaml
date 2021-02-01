@@ -16,3 +16,4 @@ properties:
 required:
   - status
   - error
+title: Modelo de retorno de Erro
