@@ -11,3 +11,19 @@ Para iniciar esse processo é necessário criar sua chave de consumo (Consumer K
 <img src="https://www.bitize.com.br/img/cadastrar-integracao.jpg" alt="Cadastrar Integração Bitize" width="80%" />
 
 Um ponto de atenção é que o Secret Key só é apresentado nesse momento, se você perder, será necessário criar outro cadastro de integração.
+
+Agora que temos o consumer_key e o secret_key podemos fazer a requisição para obtermos o token:
+
+```json http
+{
+  "method": "post",
+  "url": "https://api.bitize.com.br/auth",
+  "body":{
+    "consumer_key":"",
+    "secret_key":""
+  },
+  "headers":{
+    "Content-Type":"application/json"
+  }
+}
+```
