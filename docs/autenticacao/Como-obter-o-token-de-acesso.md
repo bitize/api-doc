@@ -52,7 +52,7 @@ Você pode testar suas credenciais abaixo. Adicione as chaves e envie o post:
 ```json http
 {
   "method": "post",
-  "url": "https://api.bitize.com.br/auth",
+  "url": "https://api.bitize.io/auth",
   "body":{
     "consumer_key":"",
     "secret_key":""
