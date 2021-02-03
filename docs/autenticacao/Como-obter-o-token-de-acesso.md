@@ -63,7 +63,7 @@ Você pode testar suas credenciais abaixo. Adicione as chaves e envie o post:
 }
 ```
 
-<br>
+
 **Resposta:**
 
  ```json json_schema
