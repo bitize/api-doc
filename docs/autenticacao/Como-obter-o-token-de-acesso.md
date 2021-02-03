@@ -54,8 +54,8 @@ Você pode testar suas credenciais abaixo. Adicione as chaves e envie o post:
   "method": "post",
   "url": "https://api.bitize.io/auth",
   "body":{
-    "consumer_key":"",
-    "secret_key":""
+    "consumer_key":"SUA CHAVE DE CONSUMO",
+    "secret_key":"SUA CHAVE SECRETA"
   },
   "headers":{
     "Content-Type":"application/json"
@@ -89,3 +89,20 @@ Você pode testar suas credenciais abaixo. Adicione as chaves e envie o post:
     }
 }
 ```
+
+Agora que você possue o token de acesso você deve incluí-lo no header de todas as suas requisições
+
+<!-- theme: info -->
+>Authorization: Bearer **SEU TOKEN**
+
+Mas você também deve se atentar a validade do token e utilizar o Refresh Token para solicitar um novo Token sem que seja necessário reenviar sua Chave de Consumo e a Chave Secreta.
+
+```json http
+{
+  "method": "get",
+  "url": "https://api.bitize.io/auth",
+  "query":{"refresh_token":"SEU REFRESH TOKEN"},
+  "headers":{
+    "Content-Type":"application/json"
+  }
+}
