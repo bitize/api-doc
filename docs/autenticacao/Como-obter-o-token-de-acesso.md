@@ -8,11 +8,45 @@ O Token de Acesso é a maneira como sua aplicação se autentica na API da plata
 Para iniciar esse processo é necessário criar sua chave de consumo (Consumer Key) para isso acesse a [plataforma](https://app.bitize.com.br/) como um administrador e, no menu, vá até Configurações > Integrações:
  <br>
 
-<img src="https://www.bitize.com.br/img/cadastrar-integracao.jpg" alt="Cadastrar Integração Bitize" width="80%" />
+![Cadastrar Integração](../../assets/images/cadastrar-integracao.jpg)
+
 
 Um ponto de atenção é que o Secret Key só é apresentado nesse momento, se você perder, será necessário criar outro cadastro de integração.
 
-Agora que temos o consumer_key e o secret_key podemos fazer a requisição para obtermos o token:
+Agora que temos o consumer key e o secret key podemos fazer a requisição para obtermos o token.
+
+
+<!-- theme: info -->
+> ### API
+> Método: POST
+> 
+> URL: https://api.bitize.com.io/auth
+>
+
+**JSON:**
+
+ ```json json_schema
+{
+    "type": "object",
+    "properties": {
+        "consumer_key": {
+            "type": "string",
+            "description":"Chave de Consumo"
+        },
+        "secret_key": {
+            "type": "string",
+            "description": "Chave Secreta"
+        },
+    },
+    "required": [
+        "consumer_key",
+        "secret_key"
+    ]
+}
+\```
+
+
+Adicione as chaves e teste abaixo:
 
 ```json http
 {
