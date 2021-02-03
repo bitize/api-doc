@@ -10,8 +10,9 @@ Para iniciar esse processo é necessário criar sua chave de consumo (Consumer K
 
 ![Cadastrar Integração](../../assets/images/cadastrar-integracao.jpg)
 
-
-Um ponto de atenção é que o Secret Key só é apresentado nesse momento, se você perder, será necessário criar outro cadastro de integração.
+<!-- theme: danger -->
+>### Atenção
+>O Secret Key só é apresentado nesse momento, se você perder, será necessário criar outro cadastro de integração.
 
 Agora que temos o consumer key e o secret key podemos fazer a requisição para obtermos o token.
 
@@ -23,7 +24,7 @@ Agora que temos o consumer key e o secret key podemos fazer a requisição para 
 > URL: https://api.bitize.com.io/auth
 >
 
-**JSON:**
+**Requisição:**
 
  ```json json_schema
 {
@@ -43,10 +44,10 @@ Agora que temos o consumer key e o secret key podemos fazer a requisição para 
         "secret_key"
     ]
 }
-\```
+```
 
 
-Adicione as chaves e teste abaixo:
+Você pode testar suas credenciais abaixo. Adicione as chaves e envie o post:
 
 ```json http
 {
@@ -59,5 +60,32 @@ Adicione as chaves e teste abaixo:
   "headers":{
     "Content-Type":"application/json"
   }
+}
+```
+
+<br>
+**Resposta:**
+
+ ```json json_schema
+{
+    "type": "object",
+    "properties": {
+        "access_token": {
+            "type": "string",
+            "description":"Token"
+        },
+        "refresh_token": {
+            "type": "string",
+            "description": "Refresh Token"
+        },
+        "expiration_access_token": {
+            "type": "string",
+            "description":"Data e hora da expiração do Token"
+        },
+        "expiration_refresh_token": {
+            "type": "string",
+            "description": "Data e hora do Refresh Token"
+        },
+    }
 }
 ```
