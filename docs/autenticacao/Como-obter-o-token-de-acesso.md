@@ -106,3 +106,6 @@ Mas você também deve se atentar a validade do token e utilizar o Refresh Token
     "Content-Type":"application/json"
   }
 }
+```
+
+Veja no GitHub um exemplo de integração com o Protheus da Totvs: https://github.com/bitize/bitize-protheus

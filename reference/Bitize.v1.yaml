@@ -378,6 +378,8 @@ paths:
       description: Lista os fornecedores cadastrados
       security:
         - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/Content-Type'
     parameters: []
     post:
       summary: Cadastrar Fornecedor
