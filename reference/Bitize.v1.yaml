@@ -424,7 +424,7 @@ paths:
         required: true
         description: ID do Fornecedor
     get:
-      summary: Listar Fornecedor
+      summary: Dados do Fornecedor
       responses:
         '200':
           description: OK
@@ -894,7 +894,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Usuário
+      summary: Dados do Usuário
       tags:
         - Usuários
       responses:
