@@ -1,9 +1,12 @@
 description: Essa é a estrutura padrão das mensagens de erro da plataforma
 type: object
+title: Modelo de retorno de Erro
 properties:
   status:
     type: number
     description: Código de status da resposta
+    minimum: 200
+    maximum: 600
   error:
     type: object
     required:
@@ -16,4 +19,3 @@ properties:
 required:
   - status
   - error
-title: Modelo de retorno de Erro

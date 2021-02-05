@@ -57,7 +57,7 @@ paths:
           required: true
       security: []
       tags:
-        - autenticação
+        - Autenticação
     post:
       summary: Token
       operationId: post-auth
@@ -124,8 +124,6 @@ paths:
   /vendors:
     get:
       summary: Listar Fornecedores
-      tags:
-        - fornecedores
       responses:
         '200':
           description: OK
@@ -380,6 +378,8 @@ paths:
         - Access Token: []
       parameters:
         - $ref: '#/components/parameters/Content-Type'
+      tags:
+        - Fornecedores
     parameters: []
     post:
       summary: Cadastrar Fornecedor
@@ -775,7 +775,7 @@ paths:
       security:
         - Access Token: []
       tags:
-        - fornecedores
+        - Fornecedores
     put:
       summary: Atualizar Fornecedor
       operationId: put-vendors-id
@@ -802,6 +802,90 @@ paths:
               $ref: '#/components/schemas/Company'
       tags:
         - fornecedores
+  /users:
+    get:
+      summary: Listar Usuários
+      tags:
+        - Usuários
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  paging:
+                    type: object
+                    properties:
+                      limit:
+                        type: number
+                      page:
+                        type: number
+                      pages:
+                        type: number
+                      total:
+                        type: number
+                  sort:
+                    type: array
+                    items:
+                      type: object
+                  available_filters:
+                    type: array
+                    items:
+                      type: string
+                  applied_filters:
+                    type: object
+                  data:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      $ref: '#/components/schemas/User'
+                required:
+                  - data
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+      operationId: get-users
+      security:
+        - Access Token: []
+      description: Lista os usuários cadastrados na plataforma
+    post:
+      summary: Cadastrar Usuário
+      operationId: post-users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+      security:
+        - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/Content-Type'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            examples: {}
+        description: ''
+      description: Cadastra usuários na plataforma
+      tags:
+        - Usuários
 components:
   schemas:
     CompanyAddress:
@@ -1127,6 +1211,85 @@ components:
         - status
         - person
       title: Empresas
+    User:
+      title: Usuários
+      type: object
+      description: Modelo do cadastro de usuários no Bitize
+      properties:
+        id:
+          type: string
+          description: ID do Usuário
+          format: uuid
+          readOnly: true
+        first_name:
+          type: string
+          description: Primeiro Nome
+        last_name:
+          type: string
+          description: Sobrenome
+        email:
+          type: string
+          description: E-mail
+          format: email
+        country_area_code:
+          type: string
+          default: '55'
+          description: DDI
+        phone:
+          type: string
+          description: Telefone com o DDD
+        extension:
+          type: string
+          description: Ramal
+        active:
+          type: boolean
+          description: Indica se o usuário está ativo
+        customer_id:
+          type: string
+          description: ID de Cliente da Plataforma
+          format: uuid
+          readOnly: true
+        external_id:
+          type: string
+          description: Identificação externa
+        created_at:
+          type: string
+          format: date-time
+          description: Data do cadastro
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          description: Data da atualização
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          description: Data da exclusão
+          readOnly: true
+        roles:
+          type: array
+          description: Funções exercidas pelo usuário
+          items:
+            type: string
+            enum:
+              - ADMIN
+              - SELLER
+              - REGISTER
+              - REQUESTER
+            default: REQUESTER
+        password:
+          type: string
+          minLength: 8
+          description: 'Senha, deve conter 8 caracteres, uma maiúscula, uma minúscula, um número e um caractere especial'
+          format: password
+          writeOnly: true
+      required:
+        - first_name
+        - last_name
+        - email
+        - roles
+        - password
   securitySchemes:
     Access Token:
       type: http
@@ -1180,5 +1343,8 @@ components:
 tags:
   - name: fornecedores
   - name: autenticação
+  - name: Usuários
+  - name: Autenticação
+  - name: Fornecedores
 security:
   - Token: []
