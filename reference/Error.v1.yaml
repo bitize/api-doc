@@ -1,23 +1,60 @@
 description: Essa é a estrutura padrão das mensagens de erro da plataforma
 type: object
-title: Modelo de mensagem de erro
 properties:
   status:
     type: number
-    description: Código de status HTTP
-  detail:
-    type:
-      - array
-      - string
-    uniqueItems: true
-    minItems: 1
-    description: 'Descrição do problema, pode ser um array no caso de um problema de validação de campo'
-    items:
-      type: object
+    description: Código de erro HTTP
   title:
     type: string
     minLength: 1
     description: Breve descrição do erro
+  detail:
+    type: string
+    minLength: 1
+    description: Descrição do erro
+  validation:
+    type: array
+    uniqueItems: true
+    minItems: 1
+    description: 'Caso seja um erro de validação de campos, o erro será detalhado aqui'
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        value: {}
+        path:
+          type: string
+          minLength: 1
+        type:
+          type: string
+          minLength: 1
+        errors:
+          type: array
+          items:
+            type: object
+        inner:
+          type: array
+          items:
+            type: object
+        message:
+          type: string
+          minLength: 1
+        params:
+          type: object
+          properties:
+            path:
+              type: string
+              minLength: 1
+            value: {}
+            originalValue:
+              type: string
+              minLength: 1
+            type:
+              type: string
+              minLength: 1
 required:
   - status
   - title
+title: Modelo de mensagem de erro

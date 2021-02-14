@@ -1006,6 +1006,29 @@ paths:
         - $ref: '#/components/parameters/Content-Type'
       tags:
         - Perfil de Aprovação
+  '/approval-profiles/{id}':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: id
+        in: path
+        required: true
+        description: ID do perfil de aprovação
+    get:
+      summary: Lista Perfil de Aprovação
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApprovalProfile'
+      operationId: get-approval-profiles-id
+      security:
+        - Access Token: []
+      description: Busca os dados do perfil de aprovação
 components:
   schemas:
     CompanyAddress:
