@@ -7,15 +7,43 @@ properties:
     description: Código de status da resposta
     minimum: 200
     maximum: 600
-  error:
-    type: object
-    required:
-      - message
-    properties:
-      message:
-        type: string
-        minLength: 1
-        description: Mensagem de erro
+  title:
+    type: string
+    description: Um breve resumo do tipo de problema
+  detail:
+    type:
+      - string
+      - array
+    description: 'Descrição do problema, pode ser um array no caso de um problema de validação de campo'
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+          description: ValidationError
+        path:
+          type: string
+          description: 'Uma sequência, indicando onde houve erro. está vazio no nível raiz'
+        errors:
+          type: array
+          description: Matriz de mensagens de erro
+          items:
+            type: string
+        params:
+          type: object
+          properties:
+            path:
+              type: string
+              description: Campo
+            value:
+              type: string
+              description: Valor
+            originalValue:
+              type: string
+              description: Valor original
+            type:
+              type: string
+              description: Tipo de valor esperado
 required:
   - status
-  - error
+  - title
