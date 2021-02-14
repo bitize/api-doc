@@ -368,8 +368,6 @@ paths:
                                   - created_at
                                   - updated_at
                                   - company_id
-        '400':
-          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
       operationId: get-vendors
@@ -846,8 +844,6 @@ paths:
                 required:
                   - data
               examples: {}
-        '400':
-          $ref: '#/components/responses/400'
         '401':
           $ref: '#/components/responses/401'
         '403':
@@ -944,6 +940,74 @@ paths:
               $ref: '#/components/schemas/User'
       tags:
         - Usuários
+  /approval-profiles/:
+    get:
+      summary: Lista Perfis de Aprovação
+      tags:
+        - Perfil de Aprovação
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  paging:
+                    $ref: '#/components/schemas/Paging'
+                  sort:
+                    $ref: '#/components/schemas/Sort'
+                  available_filters:
+                    $ref: '#/components/schemas/AvailableFilters'
+                  applied_filters:
+                    $ref: '#/components/schemas/AppliedFilters'
+                  data:
+                    type:
+                      - string
+                      - array
+                    items:
+                      $ref: '#/components/schemas/ApprovalProfile'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+      operationId: get-approval-profiles
+      security:
+        - Access Token: []
+      description: Lista os perfis de aprovação cadastrados na plataforma
+      parameters:
+        - $ref: '#/components/parameters/Sort'
+    parameters: []
+    post:
+      summary: Cadastrar Perfil de Aprovação
+      operationId: post-approval-profiles
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApprovalProfile'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApprovalProfile'
+        description: ''
+      description: Cadastro de perfil de aprovação
+      security:
+        - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/Content-Type'
+      tags:
+        - Perfil de Aprovação
 components:
   schemas:
     CompanyAddress:
@@ -1348,6 +1412,169 @@ components:
         - email
         - roles
         - password
+      x-tags:
+        - Listagem
+    Paging:
+      description: Esse objeto é utilido nas listagens de recursos
+      type: object
+      properties:
+        limit:
+          type: number
+          description: Limite de registros por página
+        page:
+          type: number
+          description: Número da página atual
+        pages:
+          type: number
+          description: Número de páginas
+        total:
+          type: number
+          description: Total de registros
+      required:
+        - limit
+        - page
+        - pages
+        - total
+      title: Paginação
+      x-tags:
+        - Listagem
+      x-examples:
+        Exemplo:
+          limit: 20
+          page: 1
+          pages: 1
+          total: 10
+    Sort:
+      title: Ordenação
+      type: array
+      description: |-
+        Exibe a ordem dos registros. Você pode ordenar o resultado das suas requisições de listagem utilizando o parâmetro "sort". Exemplo de uso:
+
+        GET /approval-profiles?sort=title-desc,external_id
+
+        Nesse exemplo estamos ordendando dois campos: "title" e "external_id", para isso basta utilizar a vírgula para separar os nomes dos campos e para determinar se a ordenação é crescente ou decrecente basta utilizar o hífen depois do nome do campo e informar 'asc' para ascendente e 'desc' para decrecente.
+      items:
+        type: object
+        properties:
+          field:
+            type: string
+            description: Campo
+          sort:
+            type: string
+            description: Ordem
+            enum:
+              - asc
+              - desc
+        required:
+          - field
+          - sort
+      x-tags:
+        - Listagem
+      x-examples:
+        Exemplo:
+          - field: id
+            sort: asc
+    AvailableFilters:
+      title: Filtros Disponíveis
+      type: array
+      description: Um array com os campos disponíveis para utilizaçao como filtro na listagem dos recursos
+      items:
+        type: string
+      x-tags:
+        - Listagem
+      x-examples:
+        Exemplo:
+          - id
+          - external_id
+    AppliedFilters:
+      title: Filtros Aplicados
+      type: array
+      description: Array contendo os filtros aplicados na consulta
+      items:
+        type: object
+        properties:
+          field:
+            type: string
+            description: Campo
+          like:
+            type: string
+            description: Filtro
+        required:
+          - field
+          - like
+      x-examples:
+        Exemplo:
+          - field: external_id
+            like: '111'
+      x-tags:
+        - Listagem
+    ApprovalProfile:
+      description: Modelo do cadastro de perfis de aprovação
+      type: object
+      title: Perfil de Aprovação
+      x-tags:
+        - Perfil de Aprovação
+      properties:
+        id:
+          type: string
+          minLength: 1
+          description: Id do perfil de aprovação
+          readOnly: true
+        external_id:
+          type: string
+          description: Identificação externa
+        title:
+          type: string
+          minLength: 1
+          description: Título do registro
+        description:
+          type: string
+          minLength: 1
+          description: Descrição do registro
+        active:
+          description: Indica se o registro está ativo
+          type: boolean
+        minimum:
+          type: string
+          minLength: 0
+          description: Valor mínimo para aprovação
+        maximum:
+          type: string
+          minLength: 1
+          description: Valor máximo do perfil de aprovação
+          readOnly: true
+        customer_id:
+          type: string
+          minLength: 1
+          description: Código da empresa no Bitize
+          readOnly: true
+        company_id:
+          type: string
+          description: Código da filial no Bitize
+        currency_id:
+          type: string
+          minLength: 1
+          default: BRL
+          description: Código da Moeda
+        created_at:
+          type: string
+          minLength: 1
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          minLength: 1
+          format: date-time
+          readOnly: true
+        deleted_at:
+          type: string
+          minLength: 1
+          format: date-time
+          readOnly: true
+      required:
+        - title
+        - description
+        - maximum
   securitySchemes:
     Access Token:
       type: http
@@ -1355,12 +1582,12 @@ components:
       description: ''
   parameters:
     Sort:
-      name: Sort
+      name: sort
       in: query
       schema:
         type: string
         example: sort=id-asc
-      description: Ordenação
+      description: 'Ordenação. Exemplo: sort=title-desc,external_id'
     Content-Type:
       name: Content-Type
       in: header
@@ -1404,5 +1631,6 @@ tags:
   - name: Usuários
   - name: Autenticação
   - name: Fornecedores
+  - name: Perfil de Aprovação
 security:
   - Token: []
