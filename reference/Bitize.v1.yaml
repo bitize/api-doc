@@ -940,7 +940,7 @@ paths:
               $ref: '#/components/schemas/User'
       tags:
         - Usuários
-  /approval-profiles/:
+  /approval-profiles:
     get:
       summary: Lista Perfis de Aprovação
       tags:
@@ -963,11 +963,9 @@ paths:
                   applied_filters:
                     $ref: '#/components/schemas/AppliedFilters'
                   data:
-                    type:
-                      - string
-                      - array
+                    type: array
                     items:
-                      $ref: '#/components/schemas/ApprovalProfile'
+                      $ref: ''
         '401':
           $ref: '#/components/responses/401'
         '403':
@@ -1412,8 +1410,6 @@ components:
         - email
         - roles
         - password
-      x-tags:
-        - Listagem
     Paging:
       description: Esse objeto é utilido nas listagens de recursos
       type: object
@@ -1603,6 +1599,7 @@ components:
         application/json:
           schema:
             $ref: ./Error.v1.yaml
+          examples: {}
     '401':
       description: 'Unauthorized: O cliente deve se autenticar para obter a resposta solicitada.'
       content:

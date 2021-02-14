@@ -1,49 +1,22 @@
-description: Essa é a estrutura padrão das mensagens de erro da plataforma
+description: Modelo de mensagem de erro
 type: object
-title: Modelo de retorno de Erro
+title: Mensagem de Erro
 properties:
   status:
     type: number
-    description: Código de status da resposta
-    minimum: 200
-    maximum: 600
-  title:
-    type: string
-    description: Um breve resumo do tipo de problema
+    description: Código de status HTTP
   detail:
     type:
-      - string
       - array
-    description: 'Descrição do problema, pode ser um array no caso de um problema de validação de campo'
+      - string
+    uniqueItems: true
+    minItems: 1
     items:
       type: object
-      properties:
-        name:
-          type: string
-          description: ValidationError
-        path:
-          type: string
-          description: 'Uma sequência, indicando onde houve erro. está vazio no nível raiz'
-        errors:
-          type: array
-          description: Matriz de mensagens de erro
-          items:
-            type: string
-        params:
-          type: object
-          properties:
-            path:
-              type: string
-              description: Campo
-            value:
-              type: string
-              description: Valor
-            originalValue:
-              type: string
-              description: Valor original
-            type:
-              type: string
-              description: Tipo de valor esperado
+  title:
+    type: string
+    minLength: 1
+    description: Breve descrição do erro
 required:
   - status
   - title
