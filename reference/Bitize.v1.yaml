@@ -1016,8 +1016,9 @@ paths:
         required: true
         description: ID do perfil de aprovação
     get:
-      summary: Lista Perfil de Aprovação
-      tags: []
+      summary: Dados do Perfil de Aprovação
+      tags:
+        - Perfil de Aprovação
       responses:
         '200':
           description: OK
@@ -1025,10 +1026,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApprovalProfile'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
       operationId: get-approval-profiles-id
       security:
         - Access Token: []
       description: Busca os dados do perfil de aprovação
+    put:
+      summary: Atualizar Perfil de Aprovação
+      operationId: put-approval-profiles-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApprovalProfile'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+      security:
+        - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/Content-Type'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApprovalProfile'
+      description: Atualizar dados do perfil de aprovação
+      tags:
+        - Perfil de Aprovação
 components:
   schemas:
     CompanyAddress:
@@ -1610,10 +1647,12 @@ components:
     Content-Type:
       name: Content-Type
       in: header
-      required: false
+      required: true
       schema:
         type: string
         default: application/json
+        enum:
+          - application/json
       description: Tipo de conteúdo
   responses:
     '400':
