@@ -11,6 +11,7 @@ properties:
       - string
     uniqueItems: true
     minItems: 1
+    description: 'Descrição do problema, pode ser um array no caso de um problema de validação de campo'
     items:
       type: object
   title:
