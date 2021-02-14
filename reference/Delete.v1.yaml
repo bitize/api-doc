@@ -1,0 +1,14 @@
+title: Modelo de mensagem de exclusão
+type: object
+description: Essa é a estrutura padrão das mensagens de exclusão
+properties:
+  status:
+    type: string
+    default: OK
+    description: Status OK
+  message:
+    type: string
+    description: Mensagem informando a exclusão
+required:
+  - status
+  - message

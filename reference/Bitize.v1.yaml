@@ -940,6 +940,27 @@ paths:
               $ref: '#/components/schemas/User'
       tags:
         - Usuários
+    delete:
+      summary: Excluir Usuário
+      operationId: delete-users-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./Delete.v1.yaml
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+      description: Exclui o usuário
+      security:
+        - Access Token: []
+      tags:
+        - Usuários
   /approval-profiles:
     get:
       summary: Lista Perfis de Aprovação
@@ -1072,6 +1093,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./Delete.v1.yaml
         '401':
           $ref: '#/components/responses/401'
         '403':
