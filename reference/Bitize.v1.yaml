@@ -1470,6 +1470,8 @@ components:
         - email
         - roles
         - password
+      x-tags:
+        - Usuários
     Paging:
       description: Esse objeto é utilido nas listagens de recursos
       type: object
