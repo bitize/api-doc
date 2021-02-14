@@ -1066,6 +1066,23 @@ paths:
       description: Atualizar dados do perfil de aprovação
       tags:
         - Perfil de Aprovação
+    delete:
+      summary: Excluir Perfil de Aprovação
+      operationId: delete-approval-profiles-id
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+      security:
+        - Access Token: []
+      description: Exclui o perfil de aprovação
+      tags:
+        - Perfil de Aprovação
 components:
   schemas:
     CompanyAddress:
