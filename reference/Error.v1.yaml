@@ -1,6 +1,6 @@
-description: Modelo de mensagem de erro
+description: Essa é a estrutura padrão das mensagens de erro da plataforma
 type: object
-title: Mensagem de Erro
+title: Modelo de mensagem de erro
 properties:
   status:
     type: number
