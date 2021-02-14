@@ -1,9 +1,18 @@
 description: Essa é a estrutura padrão das mensagens de erro da plataforma
 type: object
+title: Modelo de mensagem de erro
 properties:
   status:
     type: number
     description: Código de erro HTTP
+    enum:
+      - 200
+      - 201
+      - 400
+      - 401
+      - 403
+      - 404
+      - 500
   title:
     type: string
     minLength: 1
@@ -19,42 +28,6 @@ properties:
     description: 'Caso seja um erro de validação de campos, o erro será detalhado aqui'
     items:
       type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-        value: {}
-        path:
-          type: string
-          minLength: 1
-        type:
-          type: string
-          minLength: 1
-        errors:
-          type: array
-          items:
-            type: object
-        inner:
-          type: array
-          items:
-            type: object
-        message:
-          type: string
-          minLength: 1
-        params:
-          type: object
-          properties:
-            path:
-              type: string
-              minLength: 1
-            value: {}
-            originalValue:
-              type: string
-              minLength: 1
-            type:
-              type: string
-              minLength: 1
 required:
   - status
   - title
-title: Modelo de mensagem de erro
