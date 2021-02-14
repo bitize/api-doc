@@ -6,8 +6,6 @@ properties:
     type: number
     description: Código de erro HTTP
     enum:
-      - 200
-      - 201
       - 400
       - 401
       - 403

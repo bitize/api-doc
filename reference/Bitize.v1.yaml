@@ -877,7 +877,24 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
-            examples: {}
+            examples:
+              example-1:
+                value:
+                  id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                  first_name: string
+                  last_name: string
+                  email: user@example.com
+                  country_area_code: '55'
+                  phone: string
+                  extension: string
+                  active: true
+                  customer_id: 160c0c4b-9966-4dc1-a916-8407eb10d74e
+                  external_id: string
+                  created_at: '2019-08-24T14:15:22Z'
+                  updated_at: '2019-08-24T14:15:22Z'
+                  deleted_at: '2019-08-24T14:15:22Z'
+                  roles:
+                    - REQUESTER
         description: ''
       description: Cadastra usuários na plataforma
       tags:
@@ -1437,6 +1454,25 @@ components:
       title: Usuários
       type: object
       description: Modelo do cadastro de usuários no Bitize
+      x-tags:
+        - Usuários
+      x-examples:
+        Exemplo:
+          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          first_name: Carlos
+          last_name: da Silva
+          email: user@example.com
+          country_area_code: '55'
+          phone: '9999999999'
+          extension: '241'
+          active: true
+          customer_id: 160c0c4b-9966-4dc1-a916-8407eb10d74e
+          external_id: ''
+          created_at: '2019-08-24T14:15:22Z'
+          updated_at: '2019-08-24T14:15:22Z'
+          deleted_at: '2019-08-24T14:15:22Z'
+          roles:
+            - REQUESTER
       properties:
         id:
           type: string
@@ -1446,6 +1482,7 @@ components:
         first_name:
           type: string
           description: Primeiro Nome
+          maxLength: 60
         last_name:
           type: string
           description: Sobrenome
@@ -1453,16 +1490,20 @@ components:
           type: string
           description: E-mail
           format: email
+          maxLength: 250
         country_area_code:
           type: string
           default: '55'
           description: DDI
+          maxLength: 6
         phone:
           type: string
           description: Telefone com o DDD
+          maxLength: 20
         extension:
           type: string
           description: Ramal
+          maxLength: 10
         active:
           type: boolean
           description: Indica se o usuário está ativo
@@ -1474,6 +1515,7 @@ components:
         external_id:
           type: string
           description: Identificação externa
+          maxLength: 250
         created_at:
           type: string
           format: date-time
@@ -1505,6 +1547,8 @@ components:
           minLength: 8
           description: 'Senha, deve conter 8 caracteres, uma maiúscula, uma minúscula, um número e um caractere especial'
           format: password
+          pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/'
+          example: pa$$w0rd
           writeOnly: true
       required:
         - first_name
@@ -1512,8 +1556,6 @@ components:
         - email
         - roles
         - password
-      x-tags:
-        - Usuários
     Paging:
       description: Esse objeto é utilido nas listagens de recursos
       type: object
@@ -1623,14 +1665,17 @@ components:
         external_id:
           type: string
           description: Identificação externa
+          maxLength: 250
         title:
           type: string
           minLength: 1
           description: Título do registro
+          maxLength: 60
         description:
           type: string
           minLength: 1
           description: Descrição do registro
+          maxLength: 250
         active:
           description: Indica se o registro está ativo
           type: boolean
@@ -1651,11 +1696,13 @@ components:
         company_id:
           type: string
           description: Código da filial no Bitize
+          maxLength: 250
         currency_id:
           type: string
-          minLength: 1
+          minLength: 3
           default: BRL
           description: Código da Moeda
+          maxLength: 3
         created_at:
           type: string
           minLength: 1
