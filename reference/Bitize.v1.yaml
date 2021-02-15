@@ -1759,6 +1759,8 @@ components:
       description: Modelo de cadastro de aprovador
       type: object
       title: Aprovador
+      x-tags:
+        - Aprovadores
       properties:
         id:
           type: string
@@ -1809,6 +1811,25 @@ components:
           minLength: 1
           format: date-time
           readOnly: true
+        user:
+          type: object
+          properties:
+            first_name:
+              type: string
+              description: Nome
+              readOnly: true
+            last_name:
+              type: string
+              description: Sobrenome
+            external_id:
+              type: string
+              description: ID externo
+            email:
+              type: string
+              description: E-mail
+            avatar_url:
+              type: string
+              description: Avatar
       required:
         - id
         - active
@@ -1816,8 +1837,6 @@ components:
         - limit_value
         - customer_id
         - user_id
-      x-tags:
-        - Aprovadores
   securitySchemes:
     Access Token:
       type: http
