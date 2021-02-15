@@ -1151,6 +1151,10 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Approver'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
       operationId: get-approvers
       description: Lista os aprovadores cadastrados na plataforma
       security:
