@@ -1148,8 +1148,7 @@ paths:
                   applied_filters:
                     $ref: '#/components/schemas/AppliedFilters'
                   data:
-                    type:                     
-                      - array
+                    type: array
                     items:
                       $ref: '#/components/schemas/Approver'
       operationId: get-approvers
