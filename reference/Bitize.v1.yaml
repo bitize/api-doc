@@ -1003,7 +1003,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: ''
+                      $ref: '#/components/schemas/ApprovalProfile'
         '401':
           $ref: '#/components/responses/401'
         '403':
@@ -1125,6 +1125,37 @@ paths:
       description: Exclui o perfil de aprovação
       tags:
         - Perfil de Aprovação
+  /approvers:
+    get:
+      summary: Listar Aprovadores
+      tags:
+        - Aprovadores
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paging:
+                    $ref: '#/components/schemas/Paging'
+                  sort:
+                    $ref: '#/components/schemas/Sort'
+                  available_filters:
+                    $ref: '#/components/schemas/AvailableFilters'
+                  applied_filters:
+                    $ref: '#/components/schemas/AppliedFilters'
+                  data:
+                    type:
+                      - string
+                      - array
+                    items:
+                      $ref: '#/components/schemas/Approver'
+      operationId: get-approvers
+      description: Lista os aprovadores cadastrados na plataforma
+      security:
+        - Access Token: []
 components:
   schemas:
     CompanyAddress:
@@ -1547,7 +1578,6 @@ components:
           minLength: 8
           description: 'Senha, deve conter 8 caracteres, uma maiúscula, uma minúscula, um número e um caractere especial'
           format: password
-          pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/'
           example: pa$$w0rd
           writeOnly: true
       required:
@@ -1722,6 +1752,69 @@ components:
         - title
         - description
         - maximum
+    Approver:
+      description: Modelo de cadastro de aprovador
+      type: object
+      title: Aprovador
+      properties:
+        id:
+          type: string
+          minLength: 1
+          format: uuid
+          readOnly: true
+        external_id:
+          type: string
+          maxLength: 250
+        active:
+          type: boolean
+        limit_type:
+          type: string
+          minLength: 1
+          enum:
+            - DAILY
+            - WEEKLY
+            - MONTHLY
+        limit_value:
+          type: string
+          minLength: 1
+        customer_id:
+          type: string
+          minLength: 1
+        user_id:
+          type: string
+          minLength: 1
+          format: uuid
+        superior_approver_id:
+          type: string
+          format: uuid
+        currency_id:
+          type: string
+          minLength: 1
+          default: BRL
+        created_at:
+          type: string
+          minLength: 1
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          minLength: 1
+          format: date-time
+          readOnly: true
+        deleted_at:
+          type: string
+          minLength: 1
+          format: date-time
+          readOnly: true
+      required:
+        - id
+        - active
+        - limit_type
+        - limit_value
+        - customer_id
+        - user_id
+      x-tags:
+        - Aprovadores
   securitySchemes:
     Access Token:
       type: http
@@ -1782,5 +1875,6 @@ tags:
   - name: Autenticação
   - name: Fornecedores
   - name: Perfil de Aprovação
+  - name: Aprovadores
 security:
   - Token: []
