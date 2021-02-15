@@ -893,6 +893,7 @@ paths:
                   created_at: '2019-08-24T14:15:22Z'
                   updated_at: '2019-08-24T14:15:22Z'
                   deleted_at: '2019-08-24T14:15:22Z'
+                  password: Pa$$w0rd
                   roles:
                     - REQUESTER
         description: ''
@@ -1147,8 +1148,7 @@ paths:
                   applied_filters:
                     $ref: '#/components/schemas/AppliedFilters'
                   data:
-                    type:
-                      - string
+                    type:                     
                       - array
                     items:
                       $ref: '#/components/schemas/Approver'
