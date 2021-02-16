@@ -1240,6 +1240,25 @@ paths:
       description: 'Atualiza os dados do aprovador, não é possível alterar o ID do usuário vinculado.'
       tags:
         - Aprovadores
+    delete:
+      summary: Excluir Aprovador
+      operationId: delete-approvers-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./Delete.v1.yaml
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+      description: Exclui o aprovador da plataforma
+      tags:
+        - Aprovadores
 components:
   schemas:
     CompanyAddress:
