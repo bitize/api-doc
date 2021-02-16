@@ -1185,6 +1185,61 @@ paths:
               $ref: '#/components/schemas/Approver'
       tags:
         - Aprovadores
+  '/approvers/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: ID do aprovador
+    get:
+      summary: Dados do Aprovador
+      tags:
+        - Aprovadores
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Approver'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+      operationId: get-approvers-id
+      security:
+        - Access Token: []
+      description: Retorna os dados do aprovador
+    put:
+      summary: Atualizar Aprovador
+      operationId: put-approvers-id
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Approver'
+      security:
+        - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/Content-Type'
+      description: 'Atualiza os dados do aprovador, não é possível alterar o ID do usuário vinculado.'
+      tags:
+        - Aprovadores
 components:
   schemas:
     CompanyAddress:
