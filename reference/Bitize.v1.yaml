@@ -1892,11 +1892,14 @@ components:
               readOnly: true
             avatar:
               type: object
+              description: Avatar
               properties:
                 id:
                   type: string
+                  description: ID do avatar
                 url:
                   type: string
+                  description: URL do avatar
       required:
         - id
         - active
