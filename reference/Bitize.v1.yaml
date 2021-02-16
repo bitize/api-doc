@@ -1159,6 +1159,32 @@ paths:
       description: Lista os aprovadores cadastrados na plataforma
       security:
         - Access Token: []
+    post:
+      summary: Cadastrar Aprovador
+      operationId: post-approvers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Approver'
+        '400':
+          description: Bad Request
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          description: Forbidden
+      description: 'Cadastra um aprovador na plataforma, lembrando que só é possível cadastrar um aprovador por usuário.'
+      security:
+        - Access Token: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Approver'
+      tags:
+        - Aprovadores
 components:
   schemas:
     CompanyAddress:
@@ -1756,22 +1782,45 @@ components:
         - description
         - maximum
     Approver:
-      description: Modelo de cadastro de aprovador
+      description: Modelo de cadastro de aprovadores
       type: object
       title: Aprovador
       x-tags:
         - Aprovadores
+      x-examples:
+        example-1:
+          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          external_id: string
+          active: true
+          limit_type: DAILY
+          limit_value: string
+          customer_id: 160c0c4b-9966-4dc1-a916-8407eb10d74e
+          user_id: a169451c-8525-4352-b8ca-070dd449a1a5
+          superior_approver_id: a43a276a-f776-4945-bb5e-7dcddc979162
+          currency_id: BRL
+          created_at: '2019-08-24T14:15:22Z'
+          updated_at: '2019-08-24T14:15:22Z'
+          deleted_at: '2019-08-24T14:15:22Z'
+          user:
+            first_name: string
+            last_name: string
+            external_id: string
+            email: string
+            avatar_url: string
       properties:
         id:
           type: string
           minLength: 1
           format: uuid
+          description: ID do aprovador
           readOnly: true
         external_id:
           type: string
           maxLength: 250
+          description: ID Externo
         active:
           type: boolean
+          description: Indica se o registro está ativo
         limit_type:
           type: string
           minLength: 1
@@ -1779,12 +1828,17 @@ components:
             - DAILY
             - WEEKLY
             - MONTHLY
+          description: 'Indica o tipo de renovação do limite, se é diário, semanal ou mensal'
         limit_value:
           type: string
           minLength: 1
+          description: Valor do limite
         customer_id:
           type: string
           minLength: 1
+          description: ID do cliente
+          format: uuid
+          readOnly: true
         user_id:
           type: string
           minLength: 1
@@ -1792,27 +1846,33 @@ components:
         superior_approver_id:
           type: string
           format: uuid
+          description: Código do usuário superior
         currency_id:
           type: string
           minLength: 1
           default: BRL
+          description: Código da moeda
         created_at:
           type: string
           minLength: 1
           format: date-time
+          description: Data do cadastro
           readOnly: true
         updated_at:
           type: string
           minLength: 1
           format: date-time
+          description: Data de atualização
           readOnly: true
         deleted_at:
           type: string
           minLength: 1
           format: date-time
+          description: Data da exclusão
           readOnly: true
         user:
           type: object
+          description: Dados do usuário vinculado ao comprador
           properties:
             first_name:
               type: string
@@ -1821,15 +1881,22 @@ components:
             last_name:
               type: string
               description: Sobrenome
+              readOnly: true
             external_id:
               type: string
               description: ID externo
+              readOnly: true
             email:
               type: string
               description: E-mail
-            avatar_url:
-              type: string
-              description: Avatar
+              readOnly: true
+            avatar:
+              type: object
+              properties:
+                id:
+                  type: string
+                url:
+                  type: string
       required:
         - id
         - active
