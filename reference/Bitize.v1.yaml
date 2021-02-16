@@ -1788,9 +1788,9 @@ components:
       x-tags:
         - Aprovadores
       x-examples:
-        example-1:
+        Exemplo:
           id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
-          external_id: string
+          external_id: ''
           active: true
           limit_type: DAILY
           limit_value: string
@@ -1802,11 +1802,11 @@ components:
           updated_at: '2019-08-24T14:15:22Z'
           deleted_at: '2019-08-24T14:15:22Z'
           user:
-            first_name: string
-            last_name: string
-            external_id: string
-            email: string
-            avatar_url: string
+            first_name: João
+            last_name: Silva
+            external_id: '000006'
+            email: joao@teste.com
+            avatar: null
       properties:
         id:
           type: string
