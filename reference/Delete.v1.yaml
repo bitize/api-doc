@@ -12,3 +12,7 @@ properties:
 required:
   - status
   - message
+x-examples:
+  Exemplo:
+    status: OK
+    message: 0709e94d-a27c-44bb-9773-d49b7fbdda7a deleted
