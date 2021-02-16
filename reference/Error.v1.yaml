@@ -29,3 +29,9 @@ properties:
 required:
   - status
   - title
+x-examples:
+  Exemplo:
+    status: 400
+    title: Requisição inválida
+    detail: Erro na validação dos dados
+    validation: null
