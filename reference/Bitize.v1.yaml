@@ -375,7 +375,8 @@ paths:
       security:
         - Access Token: []
       parameters:
-        - $ref: '#/components/parameters/Content-Type'
+        - $ref: '#/components/parameters/Sort'
+        - $ref: '#/components/parameters/Deleted'
       tags:
         - Fornecedores
     parameters: []
@@ -852,6 +853,9 @@ paths:
       security:
         - Access Token: []
       description: Lista os usuários cadastrados na plataforma
+      parameters:
+        - $ref: '#/components/parameters/Sort'
+        - $ref: '#/components/parameters/Deleted'
     post:
       summary: Cadastrar Usuário
       operationId: post-users
@@ -1015,6 +1019,7 @@ paths:
       description: Lista os perfis de aprovação cadastrados na plataforma
       parameters:
         - $ref: '#/components/parameters/Sort'
+        - $ref: '#/components/parameters/Deleted'
     parameters: []
     post:
       summary: Cadastrar Perfil de Aprovação
@@ -1159,6 +1164,9 @@ paths:
       description: Lista os aprovadores cadastrados na plataforma
       security:
         - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/Sort'
+        - $ref: '#/components/parameters/Deleted'
     post:
       summary: Cadastrar Aprovador
       operationId: post-approvers
@@ -1992,8 +2000,8 @@ components:
       in: query
       schema:
         type: string
-        example: sort=id-asc
-      description: 'Ordenação. Exemplo: sort=title-desc,external_id'
+        example: sort=first_name-asc&last_name-desc
+      description: Ordenação do retorno
     Content-Type:
       name: Content-Type
       in: header
@@ -2004,6 +2012,16 @@ components:
         enum:
           - application/json
       description: Tipo de conteúdo
+    Deleted:
+      name: deleted
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - 'false'
+          - 'true'
+      description: Indica se deve listar os registros deletados
   responses:
     '400':
       description: 'Bad Request: Significa que o servidor não entendeu a requisição pois está com uma sintaxe inválida.'
