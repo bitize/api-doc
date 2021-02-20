@@ -44,8 +44,8 @@ paths:
                     refresh_token: eyJhbGcAOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJAZCI6IjI1NGJjMGU4LWU5NTMtNDRkZS05ZTUDLTa0YWNiYTM1MDAyZiIsImlhdCI6MXYxMTk1MjI1OSwiZXhwIjoxNjEyMTI1MDU5fQ.KdCuLqxBFxNaXwHgfjmyWd8X6BTAcpbCoCuRcnRGBxg
                     expiration_access_token: '2021-01-30T20:30:59.058Z'
                     expiration_refresh_token: '2021-01-31T20:30:59.058Z'
-        '400':
-          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
       operationId: get-auth
       description: Endpoint para obtenção de um novo token através de um refresh token válido
       parameters:
