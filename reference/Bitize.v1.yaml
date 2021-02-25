@@ -1267,6 +1267,35 @@ paths:
       description: Exclui o aprovador da plataforma
       tags:
         - Aprovadores
+  /approval-groups:
+    post:
+      summary: Grupos de Aprovação
+      operationId: post-approval-groups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApprovalGroup'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+      description: Cadastra um novo grupo de aprovação
+      security:
+        - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/Content-Type'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApprovalGroup'
+      tags:
+        - Grupo de Aprovação
 components:
   schemas:
     CompanyAddress:
@@ -1848,16 +1877,19 @@ components:
           type: string
           minLength: 1
           format: date-time
+          description: Data do cadastro
           readOnly: true
         updated_at:
           type: string
           minLength: 1
           format: date-time
+          description: Data da atualização
           readOnly: true
         deleted_at:
           type: string
           minLength: 1
           format: date-time
+          description: Data da exclusão
           readOnly: true
       required:
         - title
@@ -1987,8 +2019,149 @@ components:
         - active
         - limit_type
         - limit_value
-        - customer_id
         - user_id
+    ApprovalGroup:
+      title: Grupo de Aprovação
+      type: object
+      description: Modelo do cadastro de grupos de aprovação
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID do grupo de aprovação
+          readOnly: true
+        external_id:
+          type: string
+          description: Identificação externa
+        title:
+          type: string
+          description: Título do Grupo
+        description:
+          type: string
+          description: Descrição
+        active:
+          type: boolean
+          description: Indica se o grupo está ativo
+        customer_id:
+          type: string
+          format: uuid
+          description: ID do cliente no Bitize
+          readOnly: true
+        company_id:
+          type: string
+          format: uuid
+          description: ID da filial no Bitize
+        created_at:
+          type: string
+          minLength: 1
+          format: date-time
+          description: Data do cadastro
+          readOnly: true
+        updated_at:
+          type: string
+          minLength: 1
+          format: date-time
+          description: Data da atualização
+          readOnly: true
+        deleted_at:
+          type: string
+          minLength: 1
+          format: date-time
+          description: Data da exclusão
+          readOnly: true
+        members:
+          type: array
+          description: Membros do grupo de aprovação
+          items:
+            type: object
+            description: Membro do Grupo
+            properties:
+              id:
+                type: string
+                format: uuid
+                description: ID do membro
+              external_id:
+                type: string
+                description: Identificação externa
+              customer_id:
+                type: string
+                format: uuid
+                description: ID do cliente no Bitize
+                readOnly: true
+              approval_group_id:
+                type: string
+                format: uuid
+                description: ID do grupo de aprovação
+                readOnly: true
+              approver_id:
+                type: string
+                format: uuid
+                description: ID do aprovador
+              approval_profile_id:
+                type: string
+                format: uuid
+                description: ID do perfil de aprovação
+              level:
+                type: integer
+                description: Nível de aprovação
+              automatic_limit:
+                type: string
+                description: |-
+                  Limite automático, Indica se considera os limites minimos e máximos do aprovador. Se indicado "true"o
+                  sistema não exige a aprovação de pedidos
+                  que não estejam dentro da faixa do
+                  Aprovador.
+              type_approval:
+                type: string
+                enum:
+                  - VISIT
+                  - APPROVE
+                default: APPROVE
+                description: |-
+                  Tipo de aprovador no grupo de aprovacao:
+                  "VISIT"( O aprovador da apenas visto e
+                  seu saldo não é atualizado )
+                  "APPROVE" ( Seu saldo é atualizado ).
+              release_type:
+                type: string
+                enum:
+                  - INDIVIDUAL
+                  - LEVEL
+                  - DOCUMENT
+                default: INDIVIDUAL
+                description: |-
+                  Tipo de Liberação do aprovador, sendo:
+                  "INDIVIDUAL" (Liberaçao Individual)
+                  "LEVEL" (Libera todo o nivel de aprovaçao) 
+                  "DOCUMENT" (Libera todo o documento).
+              created_at:
+                type: string
+                minLength: 1
+                format: date-time
+                description: Data do cadastro
+                readOnly: true
+              updated_at:
+                type: string
+                minLength: 1
+                format: date-time
+                description: Data da atualização
+                readOnly: true
+              deleted_at:
+                type: string
+                minLength: 1
+                format: date-time
+                description: Data da exclusão
+                readOnly: true
+            required:
+              - customer_id
+              - approver_id
+              - approval_profile_id
+              - level
+      required:
+        - title
+        - customer_id
+      x-tags:
+        - Grupo de Aprovação
   securitySchemes:
     Access Token:
       type: http
@@ -2060,5 +2233,6 @@ tags:
   - name: Fornecedores
   - name: Perfil de Aprovação
   - name: Aprovadores
+  - name: Grupo de Aprovação
 security:
   - Token: []
