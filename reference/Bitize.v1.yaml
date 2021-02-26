@@ -2024,6 +2024,8 @@ components:
       title: Grupo de Aprovação
       type: object
       description: Modelo do cadastro de grupos de aprovação
+      x-tags:
+        - Grupo de Aprovação
       properties:
         id:
           type: string
@@ -2097,6 +2099,10 @@ components:
                 type: string
                 format: uuid
                 description: ID do aprovador
+              superior_approver_id:
+                type: string
+                format: uuid
+                description: ID do aprovador superior
               approval_profile_id:
                 type: string
                 format: uuid
@@ -2105,7 +2111,7 @@ components:
                 type: integer
                 description: Nível de aprovação
               automatic_limit:
-                type: string
+                type: boolean
                 description: |-
                   Limite automático, Indica se considera os limites minimos e máximos do aprovador. Se indicado "true"o
                   sistema não exige a aprovação de pedidos
@@ -2160,8 +2166,6 @@ components:
       required:
         - title
         - customer_id
-      x-tags:
-        - Grupo de Aprovação
   securitySchemes:
     Access Token:
       type: http
